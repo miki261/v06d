@@ -1,8 +1,8 @@
 #include "main.h"
 #include <cmath>
 #include "rc.h"
-#include <commdlg.h>
-#include <numbers>
+#include <commdlg.h> // za ChooseColor
+#include <numbers>  // za pi 
 
 int number_dialog::idd() const {
 	return IDD_NUMBER;
