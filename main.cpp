@@ -1,7 +1,8 @@
 #include "main.h"
 #include <cmath>
 #include "rc.h"
-#include <commdlg.h> // za ChooseColor
+#include <commdlg.h>
+#include <numbers>
 
 int number_dialog::idd() const {
 	return IDD_NUMBER;
@@ -28,9 +29,7 @@ void main_window::on_paint(HDC hdc) {
 
 	int cx = (rc.left + rc.right) / 2;
 	int cy = (rc.top + rc.bottom) / 2;
-	int big_radius = min(rc.right - rc.left, rc.bottom - rc.top) / 3;
-
-	int circle_radius = big_radius;
+	int big_radius = min(rc.right - rc.left, rc.bottom - rc.top) / 4;
 
 	
 	int old_mode = SetROP2(hdc, R2_NOTXORPEN);
@@ -42,10 +41,10 @@ void main_window::on_paint(HDC hdc) {
 	HBRUSH old_brush = (HBRUSH)SelectObject(hdc, brush);
 
 	for (int i = 0; i < num_circles; ++i) {
-		double angle = 2 * 3.14159265358979323846 * i / num_circles;
+		double angle = 2 * std::numbers::pi * i / num_circles;
 		int x = static_cast<int>(cx + big_radius * cos(angle));
 		int y = static_cast<int>(cy + big_radius * sin(angle));
-		Ellipse(hdc, x - circle_radius, y - circle_radius, x + circle_radius, y + circle_radius);
+		Ellipse(hdc, x - big_radius, y - big_radius, x + big_radius, y + big_radius);
 	}
 
 
